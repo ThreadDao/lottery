@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>导入底库 - 抽签系统</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    .file-wrap { position: relative; display: inline-block; }
+    .file-wrap input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    select { min-width: auto; }
+    .pagination {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .pagination button { padding: 8px 14px; border-radius: 10px; background: var(--surface-hover); color: var(--text); border: 1px solid var(--border); }
+    .pagination button:hover:not(:disabled) { border-color: var(--border-focus); }
+    .pagination span { color: var(--muted); font-size: 0.875rem; }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .data-table th, .data-table td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table th { color: var(--muted); font-weight: 500; font-size: 0.875rem; background: rgba(59, 130, 246, 0.08); }
+    .data-table tbody tr { transition: background 0.15s; }
+    .data-table tbody tr:hover { background: var(--surface-hover); }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .section-actions { margin-top: 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">导入底库</h1>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="draw.html">抽签</a>
+        <a href="history.html">历史记录</a>
+      </nav>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">Excel 导入</h2>
+      <p class="muted">上传 .xlsx 或 .xls，取第一张表的第一列作为名称（每行一家）。</p>
+      <div class="row">
+        <div class="file-wrap">
+          <button type="button" class="btn-primary" id="pickExcel">选择 Excel 文件</button>
+          <input type="file" id="excelFile" accept=".xlsx,.xls" />
+        </div>
+        <span id="excelStatus" class="muted"></span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">当前底库</h2>
+      <p class="muted">共 <span id="totalCount">0</span> 家</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>序号</th><th>名称</th></tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="pagination">
+        <button id="btnFirst" disabled>首页</button>
+        <button id="btnPrev" disabled>上一页</button>
+        <span id="pageInfo">第 0 / 0 页</span>
+        <button id="btnNext" disabled>下一页</button>
+        <button id="btnLast" disabled>末页</button>
+        <span class="muted" style="margin-left:8px">每页</span>
+        <select id="pageSize">
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        <span class="muted">条</span>
+      </div>
+      <div class="section-actions">
+        <button id="clearAll" class="btn-danger">清空底库</button>
+      </div>
+    </section>
+  </div>
+  <script src="import.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>历史记录 - 抽签系统</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    .history-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .history-table th, .history-table td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .history-table th { color: var(--muted); font-weight: 500; font-size: 0.875rem; background: rgba(59, 130, 246, 0.08); }
+    .history-table tbody tr { cursor: pointer; transition: background 0.15s; }
+    .history-table tbody tr:hover { background: var(--surface-hover); }
+    .history-table tbody tr:last-child td { border-bottom: none; }
+    .history-table .col-final { font-weight: 700; }
+    .history-table .col-final .final-name { color: var(--danger); font-weight: 700; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+      padding: 8px 0;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+    }
+    .back-link:hover { color: var(--accent); }
+    .detail-round1 { margin-bottom: 20px; }
+    .detail-round1 ul { list-style: none; margin: 0; padding: 0; }
+    .detail-round1 li {
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      background: var(--bg-soft);
+    }
+    .detail-final {
+      background: var(--success-bg);
+      border: 1px solid rgba(5, 150, 105, 0.25);
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--success);
+    }
+    .pagination {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .pagination button { padding: 8px 14px; border-radius: 10px; background: var(--surface-hover); color: var(--text); border: 1px solid var(--border); font: inherit; cursor: pointer; }
+    .pagination button:hover:not(:disabled) { border-color: var(--border-focus); }
+    .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .pagination select { padding: 6px 10px; min-width: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">历史记录</h1>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="import.html">导入底库</a>
+        <a href="draw.html">抽签</a>
+      </nav>
+    </header>
+
+    <section class="section" id="listSection">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+        <h2 class="section-title" style="margin: 0;">抽签记录</h2>
+        <button id="clearHistory" class="btn-danger">清空历史</button>
+      </div>
+      <p class="muted">共 <span id="historyTotal">0</span> 条</p>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>抽签号</th>
+            <th>时间</th>
+            <th>第一轮名额</th>
+            <th>最终结果</th>
+          </tr>
+        </thead>
+        <tbody id="historyList"></tbody>
+      </table>
+      <div class="pagination">
+        <button id="btnFirst" disabled>首页</button>
+        <button id="btnPrev" disabled>上一页</button>
+        <span id="pageInfo" class="muted">第 0 / 0 页</span>
+        <button id="btnNext" disabled>下一页</button>
+        <button id="btnLast" disabled>末页</button>
+        <span class="muted" style="margin-left:8px">每页</span>
+        <select id="pageSize">
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        <span class="muted">条</span>
+      </div>
+    </section>
+
+    <section class="section" id="detailSection" style="display: none;">
+      <a href="history.html" class="back-link">← 返回列表</a>
+      <h2 class="section-title" id="detailTitle">抽签详情</h2>
+      <div class="detail-round1">
+        <p class="muted">第一轮入围</p>
+        <ul id="detailRound1List"></ul>
+      </div>
+      <div class="detail-final">
+        <p class="muted">最终结果</p>
+        <p id="detailFinal"></p>
+      </div>
+    </section>
+  </div>
+  <script src="history.js"></script>
+</body>
+</html>

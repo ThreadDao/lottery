@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>抽签系统</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    body { display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .hero {
+      text-align: center;
+      max-width: 420px;
+    }
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+    .hero p { color: var(--muted); font-size: 0.95rem; margin: 0 0 36px; }
+    .nav-cards {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav-cards a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+      padding: 20px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      color: var(--text);
+      font-weight: 500;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-cards a:hover {
+      border-color: var(--border-focus);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(30, 61, 107, 0.12);
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>抽签系统</h1>
+    <p>导入底库 · 执行抽签 · 查看历史</p>
+    <nav class="nav-cards">
+      <a href="import.html">导入底库</a>
+      <a href="draw.html">抽签</a>
+      <a href="history.html">历史记录</a>
+    </nav>
+  </div>
+</body>
+</html>
